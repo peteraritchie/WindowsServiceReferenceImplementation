@@ -16,5 +16,15 @@ namespace Service
 		protected override void OnStop()
 		{
 		}
+
+		public void InteractiveStart()
+		{
+			OnStart(null);
+		}
+
+		public void InteractiveStop()
+		{
+			OnStop();
+		}
 	}
 }

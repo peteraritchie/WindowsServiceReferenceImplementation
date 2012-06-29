@@ -1,4 +1,5 @@
-﻿using System.ServiceProcess;
+﻿using System;
+using System.ServiceProcess;
 
 namespace Service
 {
@@ -6,12 +7,16 @@ namespace Service
 	{
 		static void Main()
 		{
-			ServiceBase[] ServicesToRun;
-			ServicesToRun = new ServiceBase[] 
-			{ 
-				new Service() 
-			};
-			ServiceBase.Run(ServicesToRun);
+			var service = new Service();
+			if (Environment.UserInteractive)
+			{
+				service.InteractiveStart();
+				Console.WriteLine("service running.  Press enter to exit");
+				Console.ReadLine();
+				service.InteractiveStop();
+				return;
+			}
+			ServiceBase.Run(service);
 		}
 	}
 }
